@@ -11,17 +11,17 @@ import { formatCurrency } from './utils';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
-export async function fetchRevenue() {
+export async function fetchRevenue(): Promise<Revenue[]> {
   try {
     // Artificially delay a response for demo purposes.
     // Don't do this in production :)
 
-    // console.log('Fetching revenue data...');
+    // console.log('Fetching revenue data...', `${new Date().toLocaleTimeString()}`);
     // await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const data = await sql<Revenue[]>`SELECT * FROM revenue`;
 
-    // console.log('Data fetch completed after 3 seconds.');
+    // console.log('Data fetch completed after 3 seconds.', `${new Date().toLocaleTimeString()}`);
 
     return data;
   } catch (error) {
